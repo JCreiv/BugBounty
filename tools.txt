@@ -1,6 +1,5 @@
 findomain
 amass
-shuffledns
 sublister
 subfinder
 dnsx

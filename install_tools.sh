@@ -24,6 +24,7 @@ if [[ $DRY_RUN == true ]]; then
 	    cp()   { echo "[SIMULADO] cp $*"; }
 	    tar()  { echo "[SIMULADO] tar $*"; }
 	    go() { echo "[SIMULADO] go $*"; } 
+        pipx() { echo "[SIMULADO] pipx $*"; }
 fi
 
 
@@ -45,7 +46,7 @@ sudo apt update -y && sudo apt upgrade -y
 # Dependencias comunes
 # -----------------------------------
 log_info "Instalando dependencias..."
-sudo apt install -y git wget unzip python3 python3-pip build-essential curl autoconf make automake libtool pkg-config
+sudo apt install -y git wget unzip python3 python3-pip build-essential curl autoconf make automake libtool pkg-config pipx
 
 # -----------------------------------
 # Instalación de Go desde el tar.gz oficial
@@ -114,4 +115,78 @@ else
     log_info "Subfinder ya instalado."
 fi
 
-# (Aquí seguirías con las demás herramientas igual que antes...)
+# -----------------------------------
+# Sublister
+if ! command -v sublister &> /dev/null; then
+    log_info "Instalando Sublister..."
+    git clone https://github.com/aboul3la/Sublist3r.git
+    cd Sublist3r
+    pipx install .
+    pipx ensurepath
+    cd "$DIR"
+else
+    log_info "Sublister ya instalado."
+fi
+
+# -----------------------------------
+# Dnsx
+if ! command -v dnsx &> /dev/null; then
+    log_info "Instalando Dnsx..."
+    go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+else
+    log_info "Dnsx ya instalado."
+fi
+
+# -----------------------------------
+# Httpx
+if ! command -v httpx &> /dev/null; then
+    log_info "Instalando Httpx..."
+    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+else
+    log_info "Httpx ya instalado."
+fi
+
+# -----------------------------------
+# Cero
+
+if ! command -v cero &> /dev/null; then
+    log_info "Instalando Cero..."
+    go install github.com/glebarez/cero@latest
+else
+    log_info "Cero ya instalado."
+fi
+
+# -----------------------------------
+# Gowitness
+
+if ! command -v gowitness &> /dev/null; then
+    log_info "Instalando Gowitness..."
+    go install github.com/sensepost/gowitness@latest
+else
+    log_info "Gowitness ya instalado."
+fi
+
+# -----------------------------------
+# Katana
+
+if ! command -v katana &> /dev/null; then
+    log_info "Instalando Katana..."
+    CGO_ENABLED=1 go install github.com/projectdiscovery/katana/cmd/katana@latest
+else
+    log_info "Katana ya instalado."
+fi
+
+# -----------------------------------
+# Gau
+
+if ! command -v gau &> /dev/null; then
+    log_info "Instalando Gau..."
+    go install github.com/lc/gau/v2/cmd/gau@latest
+else
+    log_info "Gau ya instalado."
+fi
+
+
+
+
+
