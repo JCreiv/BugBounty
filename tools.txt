@@ -1,0 +1,15 @@
+findomain
+amass
+shuffledns
+sublister
+subfinder
+dnsx
+cero
+
+bbot
+
+gowitness
+httpx
+katana
+gau
+
