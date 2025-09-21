@@ -48,6 +48,29 @@ sudo apt update -y && sudo apt upgrade -y
 log_info "Instalando dependencias..."
 sudo apt install -y git wget unzip python3 python3-pip build-essential curl autoconf make automake libtool pkg-config pipx
 
+
+# Instalar cargo
+if ! command -v cargo &> /dev/null; then
+    log_info "Instalando Cargo..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source $HOME/.cargo/env
+
+    # Detectar shell y añadir PATH al archivo correspondiente
+    if [ -n "$ZSH_VERSION" ]; then
+        SHELL_RC="$HOME/.zshrc"
+    else
+        SHELL_RC="$HOME/.bashrc"
+    fi
+
+    if ! grep -q 'export PATH="$HOME/.cargo/bin:$PATH"' "$SHELL_RC"; then
+        echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> "$SHELL_RC"
+        log_info "Se añadió Cargo al PATH en $SHELL_RC"
+    fi
+else
+    log_info "Cargo ya está instalado: $(cargo --version)"
+fi
+
+
 # -----------------------------------
 # Instalación de Go desde el tar.gz oficial
 # -----------------------------------
