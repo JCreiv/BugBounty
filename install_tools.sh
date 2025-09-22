@@ -220,6 +220,19 @@ if [[ ":$PATH:" != *":$HOME/go/bin:"* ]]; then
 fi
 
 
+# -----------------------------------
+# Nuclei
+
+if ! command -v nuclei &> /dev/null; then
+    log_info "Instalando Nuclei..."
+    go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+
+    log_info "Actualizando templates de Nuclei..."
+    nuclei -update-templates
+else
+    log_info "Nuclei ya instalado."
+fi
+
 
 
 
