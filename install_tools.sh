@@ -25,6 +25,8 @@ if [[ $DRY_RUN == true ]]; then
 	    tar()  { echo "[SIMULADO] tar $*"; }
 	    go() { echo "[SIMULADO] go $*"; } 
         pipx() { echo "[SIMULADO] pipx $*"; }
+        curl() { echo "[SIMULADO] curl $*"; }
+        sh () { echo "[SIMULADO] sh $*"; }
 fi
 
 
