@@ -40,11 +40,24 @@ log_info() { echo -e "${GREEN}[INFO]${RESET} $1"; }
 # Actualización del sistema
 # -----------------------------------
 log_info "Actualizando sistema..."
-sudo apt update -y && sudo apt upgrade -y
+
+# -----------------------------------
+#Comprobar el OS
+
+os_name=$(grep '^NAME=' /etc/os-release | awk '{print $1 }' | tr '="' ' ' | awk '{print $2 }')
+
+
+if [ "$os_name" = "Parrot" ]; then
+    log_info "Detected OS: Parrot"
+    sudo apt update -y && sudo parrot-upgrade -y
+else
+    sudo apt update -y && sudo apt upgrade -y
+fi
 
 # -----------------------------------
 # Dependencias comunes
 # -----------------------------------
+
 log_info "Instalando dependencias..."
 sudo apt install -y git wget unzip python3 python3-pip build-essential curl autoconf make automake libtool pkg-config pipx
 
