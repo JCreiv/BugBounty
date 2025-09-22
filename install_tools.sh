@@ -247,5 +247,15 @@ else
 fi
 
 
+# -----------------------------------
+# Instalar feroxbuster
+
+if ! command -v feroxbuster &> /dev/null; then
+    log_info "Instalando Feroxbuster..."
+    curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/main/install-nix.sh | bash -s $HOME/.local/bin
+else
+    log_info "Feroxbuster ya instalado."
+fi
+
 
 
