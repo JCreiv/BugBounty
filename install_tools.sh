@@ -210,6 +210,16 @@ else
 fi
 
 
+# -----------------------------------
+# Actualizar PATH para herramientas Go
+
+if [[ ":$PATH:" != *":$HOME/go/bin:"* ]]; then
+    echo 'export PATH=$HOME/go/bin:$PATH' >> "$HOME/.zshrc"
+    export PATH=$HOME/go/bin:$PATH
+    log_info "Añadido $HOME/go/bin al PATH"
+fi
+
+
 
 
 
