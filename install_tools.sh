@@ -152,9 +152,9 @@ else
 fi
 
 # -----------------------------------
-# Sublister
-if ! command -v sublister &> /dev/null; then
-    log_info "Instalando Sublister..."
+# Sublist3r
+if ! command -v sublist3r &> /dev/null; then
+    log_info "Instalando Sublist3r..."
     git clone https://github.com/aboul3la/Sublist3r.git
     cd Sublist3r
     pipx install .
