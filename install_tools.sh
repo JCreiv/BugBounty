@@ -4,8 +4,6 @@
 # Instalador de herramientas BugBounty
 # ===================================
 
-set -e
-
 
 DRY_RUN=false  # Cambia a true para simular sin ejecutar comandos
 
@@ -20,13 +18,13 @@ if [[ $DRY_RUN == true ]]; then
 		cd()   { echo "[SIMULADO] cd $*"; }
 		git()  { echo "[SIMULADO] git $*"; }
 		wget() { echo "[SIMULADO] wget $*"; }
-		cargo(){ echo "[SIMULADO] cargo $*"; }
 	    cp()   { echo "[SIMULADO] cp $*"; }
 	    tar()  { echo "[SIMULADO] tar $*"; }
 	    go() { echo "[SIMULADO] go $*"; } 
         pipx() { echo "[SIMULADO] pipx $*"; }
         curl() { echo "[SIMULADO] curl $*"; }
         sh () { echo "[SIMULADO] sh $*"; }
+        source() { echo "[SIMULADO] source $*"; }
 fi
 
 
