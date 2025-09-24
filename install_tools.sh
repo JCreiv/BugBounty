@@ -177,6 +177,7 @@ fi
 # Httpx
 if ! command -v httpx &> /dev/null; then
     log_info "Instalando Httpx..."
+    sudo apt remove --purge python3-httpx -y
     go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 else
     log_info "Httpx ya instalado."
@@ -257,5 +258,13 @@ else
     log_info "Feroxbuster ya instalado."
 fi
 
+# -----------------------------------
+# Instalar bbot
 
-
+if ! command -v bbot &> /dev/null; then
+    log_info "Instalando bbot..."
+    pipx install bbot
+    pipx ensurepath
+else
+    log_info "bbot ya instalado."
+fi
