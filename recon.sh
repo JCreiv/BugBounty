@@ -94,12 +94,20 @@ cero -d $DOMAIN > $TARGET_DIR/domains/raw/cero_raw.txt
 
 sort -u $TARGET_DIR/domains/raw/cero_raw.txt > $TARGET_DIR/domains/clean/cero_clean.txt
 
+
+# -----------------------------------
+# Ejecutar amass
+
+if [ -f $TARGET_DIR/domains/raw/amass_raw.txt ]; then
+    rm $TARGET_DIR/domains/raw/amass_raw.txt
+fi
+
+amass enum -passive -d "$DOMAIN" -o $TARGET_DIR/domains/raw/amass_raw.txt
+
+sort -u $TARGET_DIR/domains/raw/amass_raw.txt > $TARGET_DIR/domains/clean/amass_clean.txt
+
 # -----------------------------------
 # Combinar resultados
-
-cat $TARGET_DIR/domains/clean/*_clean.txt | sort -u > $TARGET_DIR/domains/${1}_domains_all_clean.txt
-
-dnsx -l $TARGET_DIR/domains/${1}_domains_all_clean.txt -o $TARGET_DIR/domains/${1}_domains_all_dnsx.txt
 
 
 if [ -f $TARGET_DIR/domains/${1}_domains_all_dnsx.txt ]; then
@@ -109,6 +117,11 @@ fi
 if [ -f $TARGET_DIR/domains/${1}_domains_all_clean.txt ]; then
   rm $TARGET_DIR/domains/${1}_domains_all_clean.txt
 fi
+
+cat $TARGET_DIR/domains/clean/*_clean.txt | sort -u > $TARGET_DIR/domains/${1}_domains_all_clean.txt
+
+dnsx -l $TARGET_DIR/domains/${1}_domains_all_clean.txt -o $TARGET_DIR/domains/${1}_domains_all_dnsx.txt
+
 
 # -----------------------------------
 # Crawling y filtrado de URLs
